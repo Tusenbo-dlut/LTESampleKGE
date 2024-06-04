@@ -595,8 +595,8 @@ class KGEModel(nn.Module):
 
         # file = open(args.data_path + '/PES.txt', 'a')
         logging.info(args.model, args.lte_operation, args.default_subsampling, args.freq_based_subsampling, args.freq_based_subsampling, args.max_steps, args.learning_rate, args.hidden_dim, args.gamma)
-        print("model: {} - lte_operation: {} - x_ops: {} - r_ops: {} - default_subsampling: {} - freq_based_subsampling: {} - uniq_based_subsampling: {} - max_steps {} - learning_rate: {} - hidden_dim: {} - gamma: {}" .format
-              (args.model, args.lte_operation, args.x_ops, args.r_ops, args.default_subsampling, args.freq_based_subsampling, args.uniq_based_subsampling, args.max_steps, args.learning_rate, args.hidden_dim, args.gamma), flush=True, file=file)
+        # print("model: {} - lte_operation: {} - x_ops: {} - r_ops: {} - default_subsampling: {} - freq_based_subsampling: {} - uniq_based_subsampling: {} - max_steps {} - learning_rate: {} - hidden_dim: {} - gamma: {}" .format
+        #       (args.model, args.lte_operation, args.x_ops, args.r_ops, args.default_subsampling, args.freq_based_subsampling, args.uniq_based_subsampling, args.max_steps, args.learning_rate, args.hidden_dim, args.gamma), flush=True, file=file)
         metrics_per_se = {se_idx: {"ap": .0, "auc-roc": .0, "auc-pr": .0, "AP@n": .0} for se_idx in relation_set}
 
         se_ap_list = []
