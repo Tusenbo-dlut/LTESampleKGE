@@ -1,51 +1,15 @@
-# Best Configuration for RotatE
-#
-bash run.sh train RotatE FB15k 0 0 1024 256 1000 24.0 1.0 0.0001 150000 16 -de
-bash run.sh train RotatE FB15k-237 0 0 1024 256 1000 9.0 1.0 0.00005 100000 16 -de
-bash run.sh train RotatE wn18 0 0 512 1024 500 12.0 0.5 0.0001 80000 8 -de
-bash run.sh train RotatE wn18rr 0 0 512 1024 500 6.0 0.5 0.00005 80000 8 -de
-bash run.sh train RotatE countries_S1 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 -de --countries
-bash run.sh train RotatE countries_S2 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 -de --countries 
-bash run.sh train RotatE countries_S3 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 -de --countries
-bash run.sh train RotatE YAGO3-10 0 0 1024 400 500 24.0 1.0 0.0002 100000 4 -de
-#
-# Best Configuration for pRotatE
-#
-bash run.sh train pRotatE FB15k 0 0 1024 256 1000 24.0 1.0 0.0001 150000 16
-bash run.sh train pRotatE FB15k-237 0 0 1024 256 1000 9.0 1.0 0.00005 100000 16
-bash run.sh train pRotatE wn18 0 0 512 1024 500 12.0 0.5 0.0001 80000 8
-bash run.sh train pRotatE wn18rr 0 0 512 1024 500 6.0 0.5 0.00005 80000 8
-bash run.sh train pRotatE countries_S1 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-bash run.sh train pRotatE countries_S2 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-bash run.sh train pRotatE countries_S3 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-#
 # Best Configuration for TransE
-# 
-bash run.sh train TransE FB15k 0 0 1024 256 1000 24.0 1.0 0.0001 150000 16
-bash run.sh train TransE FB15k-237 0 0 1024 256 1000 9.0 1.0 0.00005 100000 16
-bash run.sh train TransE wn18 0 0 512 1024 500 12.0 0.5 0.0001 80000 8
-bash run.sh train TransE wn18rr 0 0 512 1024 500 6.0 0.5 0.00005 80000 8
-bash run.sh train TransE countries_S1 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-bash run.sh train TransE countries_S2 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-bash run.sh train TransE countries_S3 0 0 512 64 1000 0.1 1.0 0.000002 40000 8 --countries
-#
-# Best Configuration for ComplEx
-# 
-bash run.sh train ComplEx FB15k 0 0 1024 256 1000 500.0 1.0 0.001 150000 16 -de -dr -r 0.000002
-bash run.sh train ComplEx FB15k-237 0 0 1024 256 1000 200.0 1.0 0.001 100000 16 -de -dr -r 0.00001
-bash run.sh train ComplEx wn18 0 0 512 1024 500 200.0 1.0 0.001 80000 8 -de -dr -r 0.00001
-bash run.sh train ComplEx wn18rr 0 0 512 1024 500 200.0 1.0 0.002 80000 8 -de -dr -r 0.000005
-bash run.sh train ComplEx countries_S1 0 0 512 64 1000 1.0 1.0 0.000002 40000 8 -de -dr -r 0.0005 --countries
-bash run.sh train ComplEx countries_S2 0 0 512 64 1000 1.0 1.0 0.000002 40000 8 -de -dr -r 0.0005 --countries
-bash run.sh train ComplEx countries_S3 0 0 512 64 1000 1.0 1.0 0.000002 40000 8 -de -dr -r 0.0005 --countries
-#
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/drugbank --model TransE --x_ops p.d.b -lte -n 1 -b 512 -d 600 -id 600 -od 600 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --freq_based_subsampling -save models/TransE_xos_pdb_freq_drugbank --test_batch_size 32
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/BioSNAP --model TransE --x_ops p -lte -n 1 -b 512 -d 1000 -id 1000 -od 1000 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --uniq_based_subsampling -save models/TransE_xos_p_uniq_drugbank --test_batch_size 32
+
 # Best Configuration for DistMult
-# 
-bash run.sh train DistMult FB15k 0 0 1024 256 2000 500.0 1.0 0.001 150000 16 -r 0.000002
-bash run.sh train DistMult FB15k-237 0 0 1024 256 2000 200.0 1.0 0.001 100000 16 -r 0.00001
-bash run.sh train DistMult wn18 0 0 512 1024 1000 200.0 1.0 0.001 80000 8 -r 0.00001
-bash run.sh train DistMult wn18rr 0 0 512 1024 1000 200.0 1.0 0.002 80000 8 -r 0.000005
-bash run.sh train DistMult countries_S1 0 0 512 64 2000 1.0 1.0 0.000002 40000 8 -r 0.0005 --countries
-bash run.sh train DistMult countries_S2 0 0 512 64 2000 1.0 1.0 0.000002 40000 8 -r 0.0005 --countries
-bash run.sh train DistMult countries_S3 0 0 512 64 2000 1.0 1.0 0.000002 40000 8 -r 0.0005 --countries
-#
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/drugbank --model TransE --x_ops p.d.b -lte -n 1 -b 512 -d 600 -id 600 -od 600 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --freq_based_subsampling -save models/TransE_xos_pdb_freq_drugbank --test_batch_size 32
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/BioSNAP --model TransE --x_ops p -lte -n 1 -b 512 -d 2000 -id 2000 -od 2000 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --uniq_based_subsampling -save models/TransE_xos_p_uniq_drugbank --test_batch_size 32
+
+# Best Configuration for ComplEx
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/drugbank --model TransE --x_ops p.d.b -lte -n 1 -b 512 -d 600 -id 1200 -od 1200 -hd 0.1 -g 6.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --freq_based_subsampling -save models/TransE_xos_pdb_freq_drugbank --test_batch_size 32
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/BioSNAP --model TransE --x_ops p -lte -n 1 -b 512 -d 1000 -id 2000 -od 2000 -hd 0.1 -g 6.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --uniq_based_subsampling -save models/TransE_xos_p_uniq_drugbank --test_batch_size 32
+
+# Best Configuration for RotatE
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/drugbank --model TransE --x_ops p.d.b -lte -n 1 -b 512 -d 600 -id 1200 -od 1200 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --freq_based_subsampling -save models/TransE_xos_pdb_freq_drugbank --test_batch_size 32
+CUDA_VISIBLE_DEVICES=0 python -u codes/run.py --do_train --cuda --do_test --data_path data/BioSNAP --model TransE --x_ops p -lte -n 1 -b 512 -d 1000 -id 2000 -od 2000 -hd 0.1 -g 24.0 -a 1.0 -adv -lr 0.01 --max_steps 20000 --uniq_based_subsampling -save models/TransE_xos_p_uniq_drugbank --test_batch_size 32
